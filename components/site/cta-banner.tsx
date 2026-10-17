@@ -22,7 +22,7 @@ export function CtaBanner() {
     size="lg"
     className="inline-flex items-center justify-center gap-2 rounded-[3px] border border-foreground bg-background px-8 py-3 font-mono text-[14px] text-foreground shadow-[-5px_5px_0_0_#00D38D]"
   >
-    <Link href="//contact">
+    <Link href="/contact">
       Request Demo
       <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
     </Link>

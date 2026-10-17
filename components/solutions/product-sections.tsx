@@ -93,7 +93,7 @@ export function ProductSections() {
                     size="lg"
                     className="inline-flex items-center justify-center gap-2 rounded-[3px] bg-[#111827] px-8 py-3 font-mono text-[14px] text-white shadow-[-5px_5px_0_0_#2DB266]"
                   >
-                    <Link href="//contact">
+                    <Link href="/contact">
                       Request Demo
                       <ArrowRight className="h-4 w-4" />
                     </Link>
