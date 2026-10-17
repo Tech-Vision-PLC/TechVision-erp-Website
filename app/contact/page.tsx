@@ -1,155 +1,578 @@
-import { SiteNav } from "@/components/site/site-nav"
-import { SiteFooter } from "@/components/site/site-footer"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react"
+"use client";
+
+import { FormEvent, useState } from "react";
+import {
+  ArrowRight,
+  CheckCircle2,
+  Clock3,
+  Code2,
+  Globe2,
+  Loader2,
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+  Sparkles,
+  Building2,
+  Users,
+  XCircle,
+} from "lucide-react";
+
+import { SiteNav } from "@/components/site/site-nav";
+
+const services = [
+  "ERP Implementation",
+  "HR Management System",
+  "Custom Software Development",
+  "Website Development",
+  "Other",
+];
+
+const serviceCards = [
+  {
+    title: "ERP Solutions",
+    description:
+      "Manage business operations, finance, inventory, and workflows in one integrated system.",
+    icon: Building2,
+  },
+  {
+    title: "HR Management",
+    description:
+      "Simplify employee records, attendance, leave management, and HR processes.",
+    icon: Users,
+  },
+  {
+    title: "Custom Software",
+    description:
+      "Build software tailored to your organization's specific needs and workflows.",
+    icon: Code2,
+  },
+  {
+    title: "Website Development",
+    description:
+      "Create modern, responsive websites that strengthen your organization's online presence.",
+    icon: Globe2,
+  },
+];
 
 export default function ContactPage() {
+  const [loading, setLoading] = useState(false);
+
+  const [status, setStatus] = useState<{
+    success: boolean;
+    message: string;
+  } | null>(null);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (loading) return;
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const payload = {
+      full_name: String(formData.get("full_name") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim(),
+      phone: String(formData.get("phone") ?? "").trim(),
+      company: String(formData.get("company") ?? "").trim(),
+      service: String(formData.get("service") ?? ""),
+      message: String(formData.get("message") ?? "").trim(),
+      website: String(formData.get("website") ?? ""),
+    };
+
+    setLoading(true);
+    setStatus(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        setStatus({
+          success: false,
+          message:
+            result.message ||
+            "We couldn't submit your request. Please try again.",
+        });
+
+        return;
+      }
+
+      setStatus({
+        success: true,
+        message:
+          result.message ||
+          "Thank you for contacting TechVision. Our team will get back to you soon.",
+      });
+
+      form.reset();
+    } catch {
+      setStatus({
+        success: false,
+        message:
+          "Unable to connect right now. Please check your internet connection and try again.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const inputClasses =
+    "mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition placeholder:text-muted-foreground focus:border-primary focus:ring-4 focus:ring-primary/10";
+
+  const labelClasses = "text-sm font-medium text-foreground";
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <SiteNav />
 
-      <section className="mx-auto max-w-[1200px] px-4 pb-14 pt-32 sm:px-6 lg:px-8 lg:pt-36">
-        <div className="mx-auto max-w-[980px] pt-6 text-center sm:pt-10">
-          <h1 className="mx-auto max-w-[820px] text-[clamp(2.2rem,4vw,4rem)] font-semibold leading-[0.94] tracking-[-0.06em] text-foreground">
-            Let&apos;s Build Reliable
-            <span className="mt-2 block">Infrastructure Together</span>
-          </h1>
+      {/* Hero and contact form */}
+      <section className="relative isolate overflow-hidden border-b border-border">
+        {/* Decorative background */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-32 -top-32 -z-10 h-96 w-96 rounded-full bg-primary/10 blur-3xl"
+        />
 
-          <p className="mx-auto mt-7 max-w-[780px] text-base text-muted-foreground sm:text-lg">
-            Tell us about your organization and what you want to improve. Our team will get back to you
-            within one business day.
-          </p>
-        </div>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-40 -left-32 -z-10 h-96 w-96 rounded-full bg-primary/5 blur-3xl"
+        />
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-[1.6fr_0.9fr]">
-          <div className="rounded-[18px] border border-border bg-card p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.35)] sm:p-8">
-            <h2 className="text-[clamp(1.7rem,2vw,2.3rem)] font-semibold tracking-[-0.04em] text-foreground">
-              Schedule a Consultation
-            </h2>
+        <div className="mx-auto grid max-w-[1320px] gap-12 px-6 py-14 sm:py-20 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-12 lg:py-24">
+          {/* Left: Contact information */}
+          <div>
+            <div className="inline-flex items-center gap-2 border border-primary/20 bg-primary/5 px-4 py-2 text-sm font-medium text-primary">
+              <Sparkles className="h-4 w-4" />
+              Let&apos;s build something great
+            </div>
 
-            <div className="mt-6 grid gap-5 sm:grid-cols-2">
-              <div>
-                <label className="mb-2 block text-[0.68rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                  First Name
-                </label>
-                <Input className="h-12 rounded-none border-border bg-transparent text-base text-foreground placeholder:text-muted-foreground" />
-              </div>
+            <h1 className="mt-6 max-w-2xl font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+              Let&apos;s discuss your{" "}
+              <span className="text-primary">
+                next digital solution.
+              </span>
+            </h1>
 
-              <div>
-                <label className="mb-2 block text-[0.68rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                  Last Name
-                </label>
-                <Input className="h-12 rounded-none border-border bg-transparent text-base text-foreground placeholder:text-muted-foreground" />
-              </div>
+            <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
+              Looking for ERP, HR management, custom software, or a
+              professional website? Tell us about your organization and
+              requirements. We&apos;ll help you find the right solution.
+            </p>
 
-              <div>
-                <label className="mb-2 block text-[0.68rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                  Work Email
-                </label>
-                <Input className="h-12 rounded-none border-border bg-transparent text-base text-foreground placeholder:text-muted-foreground" />
-              </div>
+            {/* Contact details */}
+            <div className="mt-10 space-y-6">
+              {/* Email */}
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center border border-border bg-primary/10 text-primary">
+                  <Mail className="h-5 w-5" strokeWidth={1.8} />
+                </div>
 
-              <div>
-                <label className="mb-2 block text-[0.68rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                  Phone Number
-                </label>
-                <Input className="h-12 rounded-none border-border bg-transparent text-base text-foreground placeholder:text-muted-foreground" />
-              </div>
+                <div className="min-w-0">
+                  <p className="font-semibold text-foreground">
+                    Email our team
+                  </p>
 
-              <div className="sm:col-span-2">
-                <label className="mb-2 block text-[0.68rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                  Company Name
-                </label>
-                <Input className="h-12 rounded-none border-border bg-transparent text-base text-foreground placeholder:text-muted-foreground" />
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="mb-2 block text-[0.68rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                  Area of Interest
-                </label>
-                <div className="relative">
-                  <select className="h-12 w-full appearance-none rounded-none border border-border bg-transparent px-3 text-base text-foreground outline-none bg-background text-foreground dark:[color-scheme:dark]">
-                    <option>Network Solutions</option>
-                    <option>Infrastructure</option>
-                    <option>Security</option>
-                    <option>Managed Services</option>
-                  </select>
-                  <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-muted-foreground">
-                    ▾
-                  </span>
+                  <a
+                    href="mailto:techvision9772@gmail.com"
+                    className="mt-1 inline-block break-all text-sm text-muted-foreground transition-colors hover:text-primary sm:text-base"
+                  >
+                    techvision9772@gmail.com
+                  </a>
                 </div>
               </div>
 
-              <div className="sm:col-span-2">
-                <label className="mb-2 block text-[0.68rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                  Project Details
-                </label>
-                <textarea
-                  rows={5}
-                  className="w-full resize-none rounded-none border border-border bg-transparent p-3 text-base text-foreground placeholder:text-muted-foreground outline-none"
-                />
+              {/* Phone */}
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center border border-border bg-primary/10 text-primary">
+                  <Phone className="h-5 w-5" strokeWidth={1.8} />
+                </div>
+
+                <div>
+                  <p className="font-semibold text-foreground">
+                    Call our team
+                  </p>
+
+                  <a
+                    href="tel:+251936977299"
+                    className="mt-1 inline-block text-sm text-muted-foreground transition-colors hover:text-primary sm:text-base"
+                  >
+                    +251 936 977299
+                  </a>
+
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    Ethiopia
+                  </p>
+                </div>
+              </div>
+
+              {/* Consultation */}
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center border border-border bg-primary/10 text-primary">
+                  <Clock3 className="h-5 w-5" strokeWidth={1.8} />
+                </div>
+
+                <div>
+                  <p className="font-semibold text-foreground">
+                    Personalized consultation
+                  </p>
+
+                  <p className="mt-1 max-w-sm text-sm leading-6 text-muted-foreground">
+                    Discuss your requirements with our team and explore
+                    the right approach for your organization.
+                  </p>
+                </div>
+              </div>
+
+              {/* Location */}
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center border border-border bg-primary/10 text-primary">
+                  <MapPin className="h-5 w-5" strokeWidth={1.8} />
+                </div>
+
+                <div>
+                  <p className="font-semibold text-foreground">
+                    TechVision PLC
+                  </p>
+
+                  <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                    Semay Tower, 9th Floor
+                    <br />
+                    Bole, Addis Ababa, Ethiopia
+                  </p>
+                </div>
               </div>
             </div>
 
-            <Button
-              className="mt-6 inline-flex items-center gap-2 rounded-md bg-foreground px-6 py-5 text-[0.72rem] font-medium uppercase tracking-[0.16em] text-background hover:bg-foreground/90"
-            >
-              Submit Request
-              <ArrowRight className="h-4 w-4" />
-            </Button>
+            {/* Supporting message */}
+            <div className="mt-10 flex items-start gap-3 border-l-2 border-primary bg-primary/5 p-4">
+              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+
+              <p className="text-sm leading-6 text-muted-foreground">
+                Tell us what you want to achieve. We&apos;ll discuss your
+                requirements and help you identify a practical digital
+                solution.
+              </p>
+            </div>
           </div>
 
-          <aside className="self-start rounded-[18px] border border-border bg-card p-5 shadow-[0_12px_30px_rgba(18,28,38,0.08),0_0_0_1px_rgba(17,24,39,0.04)] sm:p-8">
-            <h3 className="text-[clamp(1.7rem,2vw,2.4rem)] font-semibold tracking-[-0.04em] text-foreground">
-              Contact Information
-            </h3>
+          {/* Right: Contact form */}
+          <div
+            id="contact-form"
+            className="border border-border bg-card p-5 shadow-xl shadow-black/5 sm:p-8 lg:p-9"
+          >
+            <div className="mb-8">
+              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-primary">
+                Contact TechVision
+              </p>
 
-            <div className="mt-7 space-y-6">
-              <div className="flex items-start gap-3">
-                <span className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <MapPin className="h-3.5 w-3.5" />
-                </span>
-                <div>
-                  <p className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                    Headquarters
-                  </p>
-                  <p className="mt-1 text-base text-foreground">Bole Road</p>
-                  <p className="text-base text-foreground">Addis Ababa, Ethiopia</p>
-                </div>
-              </div>
+              <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+                Tell us about your project
+              </h2>
 
-              <div className="flex items-start gap-3">
-                <span className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <Phone className="h-3.5 w-3.5" />
-                </span>
-                <div>
-                  <p className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                    Phone
-                  </p>
-                  <p className="mt-1 text-base text-foreground">+251 11 123 4567</p>
-                  <p className="text-base text-foreground">Mon-Fri, 8:30am-11:30pm EAT</p>
-                  <p className="text-base text-foreground">Local Ethiopian Support</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <span className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <Mail className="h-3.5 w-3.5" />
-                </span>
-                <div>
-                  <p className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                    Email
-                  </p>
-                  <p className="mt-1 text-base text-foreground">hello@techvision.et</p>
-                </div>
-              </div>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                Share a few details, and our team will contact you to
+                discuss your needs.
+              </p>
             </div>
-          </aside>
+
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Honeypot spam protection */}
+              <div
+                aria-hidden="true"
+                className="absolute -left-[10000px] h-px w-px overflow-hidden"
+              >
+                <label htmlFor="website">
+                  Leave this field empty
+                </label>
+
+                <input
+                  id="website"
+                  name="website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
+              {/* Full name */}
+              <div>
+                <label htmlFor="full_name" className={labelClasses}>
+                  Full name <span className="text-red-500">*</span>
+                </label>
+
+                <input
+                  id="full_name"
+                  name="full_name"
+                  type="text"
+                  autoComplete="name"
+                  placeholder="Your full name"
+                  required
+                  minLength={2}
+                  maxLength={140}
+                  className={inputClasses}
+                />
+              </div>
+
+              {/* Email and phone */}
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div className="min-w-0">
+                  <label htmlFor="email" className={labelClasses}>
+                    Email address <span className="text-red-500">*</span>
+                  </label>
+
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="you@company.com"
+                    required
+                    maxLength={254}
+                    className={inputClasses}
+                  />
+                </div>
+
+                <div className="min-w-0">
+                  <label htmlFor="phone" className={labelClasses}>
+                    Phone number
+                  </label>
+
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    autoComplete="tel"
+                    placeholder="+251 ..."
+                    maxLength={50}
+                    className={inputClasses}
+                  />
+                </div>
+              </div>
+
+              {/* Organization */}
+              <div>
+                <label htmlFor="company" className={labelClasses}>
+                  Company or organization
+                </label>
+
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  autoComplete="organization"
+                  placeholder="Your company or institution"
+                  maxLength={140}
+                  className={inputClasses}
+                />
+              </div>
+
+              {/* Service */}
+              <div>
+                <label htmlFor="service" className={labelClasses}>
+                  What service are you interested in?{" "}
+                  <span className="text-red-500">*</span>
+                </label>
+
+                <select
+                  id="service"
+                  name="service"
+                  required
+                  defaultValue=""
+                  className={`${inputClasses} cursor-pointer`}
+                >
+                  <option value="" disabled>
+                    Select a service
+                  </option>
+
+                  {services.map((service) => (
+                    <option key={service} value={service}>
+                      {service}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Project requirements */}
+              <div>
+                <label htmlFor="message" className={labelClasses}>
+                  Tell us about your requirements
+                </label>
+
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  maxLength={5000}
+                  placeholder="What challenges are you trying to solve? What features or services do you need?"
+                  className={`${inputClasses} resize-y`}
+                />
+
+                <p className="mt-2 text-xs text-muted-foreground">
+                  Include any important requirements, goals, or questions.
+                </p>
+              </div>
+
+              {/* Submission feedback */}
+              {status && (
+                <div
+                  role="status"
+                  aria-live="polite"
+                  className={`flex items-start gap-3 border p-4 text-sm leading-6 ${
+                    status.success
+                      ? "border-primary/30 bg-primary/10 text-foreground"
+                      : "border-red-500/30 bg-red-500/10 text-red-600 dark:text-red-400"
+                  }`}
+                >
+                  {status.success ? (
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
+                  ) : (
+                    <XCircle className="mt-0.5 h-5 w-5 shrink-0" />
+                  )}
+
+                  <p>{status.message}</p>
+                </div>
+              )}
+
+              {/* Submit */}
+              <button
+                type="submit"
+                disabled={loading}
+                className="group flex w-full items-center justify-center gap-3 border border-primary bg-primary px-6 py-4 text-sm font-semibold text-primary-foreground transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                    Sending your request...
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-4 w-4" />
+                    Send inquiry
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </>
+                )}
+              </button>
+
+              <p className="text-center text-xs leading-5 text-muted-foreground">
+                Your information will be used by TechVision to respond
+                to your inquiry.
+              </p>
+            </form>
+          </div>
         </div>
       </section>
 
-      <SiteFooter />
+      {/* Services */}
+      <section className="mx-auto max-w-[1320px] px-6 py-16 lg:px-12 lg:py-20">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-primary">
+            What we do
+          </p>
+
+          <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            Technology that works for your organization
+          </h2>
+
+          <p className="mt-4 text-base leading-7 text-muted-foreground">
+            We help organizations improve operations, manage resources,
+            and build better digital experiences.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {serviceCards.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <article
+                key={item.title}
+                className="group relative h-full"
+              >
+                {/* Offset accent matching your pricing page */}
+                <div className="absolute -left-1 top-1 h-full w-full border border-primary bg-primary/10" />
+
+                <div className="relative z-10 flex h-full min-h-[240px] flex-col border border-border bg-background p-6 transition-transform duration-300 group-hover:-translate-y-1">
+                  <div className="flex h-11 w-11 items-center justify-center bg-primary/10 text-primary">
+                    <Icon className="h-5 w-5" strokeWidth={1.8} />
+                  </div>
+
+                  <h3 className="mt-5 font-display text-lg font-semibold text-foreground">
+                    {item.title}
+                  </h3>
+
+                  <p className="mt-3 flex-1 text-sm leading-6 text-muted-foreground">
+                    {item.description}
+                  </p>
+
+                  <a
+                    href="#contact-form"
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary"
+                  >
+                    Discuss your needs
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </a>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        {/* CTA */}
+        <div className="mt-16 border border-border bg-card p-6 sm:p-10">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+            <div className="max-w-2xl">
+              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-primary">
+                Ready to get started?
+              </p>
+
+              <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+                Let&apos;s turn your ideas into solutions.
+              </h3>
+
+              <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
+                Contact TechVision to discuss your project and explore
+                how technology can support your organization.
+              </p>
+            </div>
+
+            <a
+              href="#contact-form"
+              className="inline-flex shrink-0 items-center justify-center gap-2 border border-primary bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
+            >
+              Contact our team
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-border bg-background">
+        <div className="mx-auto flex max-w-[1320px] flex-col gap-4 px-6 py-8 sm:flex-row sm:items-center sm:justify-between lg:px-12">
+          <div>
+            <p className="font-display text-lg font-semibold text-primary">
+              TechVision
+            </p>
+
+            <p className="mt-1 text-sm text-muted-foreground">
+              Smart digital solutions for modern organizations.
+            </p>
+          </div>
+
+          <div className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} TechVision. All rights reserved.
+          </div>
+        </div>
+      </footer>
     </main>
-  )
+  );
 }

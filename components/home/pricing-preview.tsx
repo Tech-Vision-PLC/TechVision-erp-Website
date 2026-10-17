@@ -5,14 +5,14 @@ const pricingPreview = [
   {
     name: "Starter",
     description: "For small teams getting started",
-    price: "$49",
+    price: "10,000",
     suffix: "/mo",
     icon: Rocket,
   },
   {
     name: "Growth",
     description: "For growing organizations",
-    price: "$79",
+    price: "15,000",
     suffix: "/mo",
     icon: TrendingUp,
   },
