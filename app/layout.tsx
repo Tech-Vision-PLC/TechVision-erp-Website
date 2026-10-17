@@ -14,11 +14,35 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
-export const metadata: Metadata = {
-  title: "TechVision — Smart Digital Solutions for Modern Organizations",
+
+
+export const metadata = {
+  title: "TechVision Ethiopia Addis Abeba | ERP, HR & Software Development",
   description:
-    "TechVision builds cloud-based LMS, Education ERP, ERP, and HR Management systems that help schools, universities, and businesses run smarter. Local Ethiopian support.",
-  generator: "v0.app",
+    "TechVision provides cloud-based ERP software, HR management systems, and custom software development for businesses, schools, and universities in Ethiopia. Get reliable technology solutions and local support.",
+  keywords: [
+    "ERP software Ethiopia Addis Abeba",
+    "HR management system Ethiopia Addis Abeba",
+    "ERP implementation Ethiopia Addis Abeba",
+    "custom software development Ethiopia Addis Abeba",
+    "website development Ethiopia Addis Abeba",
+    "business management software Ethiopia Addis Abeba",
+    "school management software Ethiopia Addis Abeba",
+    "TechVision Ethiopia Addis Abeba",
+  ],
+  metadataBase: new URL("https://techvision.et"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "TechVision Ethiopia Addis Abeba | ERP, HR & Software Development",
+    description:
+      "Modern ERP, HR management, and custom software solutions for Ethiopian businesses, schools, and universities.",
+    url: "https://techvision.et",
+    siteName: "TechVision",
+    locale: "en_ET",
+    type: "website",
+  },
   icons: {
   icon: [
     {
