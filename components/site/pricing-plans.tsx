@@ -17,7 +17,7 @@ type BillingPeriod = "monthly" | "annual";
 // Configure this rate from your pricing settings or backend.
 // This is an example rate, not a live exchange rate.
 // Update it before using ETB conversion in production.
-const USD_TO_ETB_RATE = 190;
+const USD_TO_ETB_RATE = 199;
 
 const currencyConfig: Record<
   Currency,
@@ -60,7 +60,7 @@ export function PricingPlans({
   showHeader?: boolean;
 }) {
   const [billingPeriod, setBillingPeriod] =
-    useState<BillingPeriod>("monthly");
+    useState<BillingPeriod>("annual");
 
   const [currency, setCurrency] = useState<Currency>("ETB");
 

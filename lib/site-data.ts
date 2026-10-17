@@ -135,7 +135,7 @@ export const pricingPlans = [
     name: "Starter",
     description: "For small teams getting started",
     monthly: "50",
-    annual: "480",
+    annual: "40",
     features: [
       "1 product module",
       "Up to 100 users",
@@ -151,7 +151,7 @@ export const pricingPlans = [
     name: "Growth",
     description: "For growing organizations",
     monthly:65,
-    annual: 620,
+    annual: 52,
     features: [
       "Up to 2 product modules",
       "Up to 250 users",
@@ -167,7 +167,7 @@ export const pricingPlans = [
     name: "Education Suite",
     description: "LMS + Education ERP bundle",
     monthly: 90,
-    annual: 864,
+    annual: 72,
     features: [
       "LMS + Education ERP",
       "Unlimited students",
