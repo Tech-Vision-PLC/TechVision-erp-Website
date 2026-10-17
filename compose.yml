@@ -1,0 +1,13 @@
+services:
+  # Node.js service (use with: docker compose up nextjs-standalone --build)
+  nextjs-standalone:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ghcr.io/mehariwamlake/lms-nextjs:latest
+    container_name: nextjs-standalone-container
+    environment:
+      NODE_ENV: production
+      PORT: "3001"
+    restart: unless-stopped
+

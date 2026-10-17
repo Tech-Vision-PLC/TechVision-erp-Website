@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  nextjs-standalone:
+    build: .
+    image: ghcr.io/mehariwamlake/lms-nextjs:latest
+    container_name: nextjs-app-container
+    deploy:
+      replicas: 1
+      labels:
+        - traefik.enable=true
+
+        # HTTP
+        - traefik.http.routers.nextjs-http.rule=Host(`${APP_DOMAIN}`)
+        - traefik.http.routers.nextjs-http.entrypoints=web
+        - traefik.http.routers.nextjs-http.middlewares=redirect-to-https
+
+        # HTTPS
+        - traefik.http.routers.nextjs-https.rule=Host(`${APP_DOMAIN}`)
+        - traefik.http.routers.nextjs-https.entrypoints=websecure
+        - traefik.http.routers.nextjs-https.tls=true
+        - traefik.http.routers.nextjs-https.tls.certresolver=letsencrypt
+
+        # Next.js port
+        - traefik.http.services.nextjs.loadbalancer.server.port=3000
+
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true
