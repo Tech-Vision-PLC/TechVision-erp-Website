@@ -1,3 +1,5 @@
+import { Workflow, Globe, Mail } from "lucide-react";
+
 export type Product = {
   slug: string;
   name: string;
@@ -196,23 +198,74 @@ export const pricingPlans = [
   },
 ];
 
-export const bundles = [
+export const services = [
   {
-    name: "Education Suite",
-    products: ["LMS", "Education ERP"],
-    description: "Everything an institution needs to teach and operate.",
-    save: "Save 25%",
+    name: "n8n Hosting",
+    category: "Business Automation",
+    description:
+      "Automate repetitive tasks and connect your favorite business applications with your own hosted n8n instance.",
+    price: "3,900",
+    currency: "ETB",
+    period: "/ month",
+    icon: Workflow,
+    badge: "Monthly Subscription",
+    features: [
+      "Dedicated n8n instance",
+      "Secure server deployment",
+      "Workflow automation",
+      "Connect APIs and business apps",
+      "Ongoing hosting",
+    ],
+    note: "Custom integrations and advanced support may cost extra.",
+    cta: "Get Started",
+    href: "/contact?service=n8n-hosting",
+    featured: true,
+    comingSoon: false,
   },
   {
-    name: "Business Suite",
-    products: ["ERP", "HR Management"],
-    description: "Run finance, operations, and people from one platform.",
-    save: "Save 25%",
+    name: "Website Development",
+    category: "Web Design & Development",
+    description:
+      "Get a professional website tailored to your business, from a simple company profile to a comprehensive digital platform.",
+    price: "Custom",
+    currency: "",
+    period: " pricing",
+    icon: Globe,
+    badge: "Based on Page Count",
+    features: [
+      "Modern, responsive design",
+      "Pricing based on page count",
+      "Mobile-friendly experience",
+      "SEO-friendly website structure",
+      "Deployment and launch support",
+    ],
+    note: "Final pricing depends on page count, features, and integrations.",
+    cta: "Request a Quote",
+    href: "/contact?service=website-development",
+    featured: false,
+    comingSoon: false,
   },
   {
-    name: "Enterprise Suite",
-    products: ["LMS", "Education ERP", "ERP", "HR Management"],
-    description: "The complete TechVision platform, fully integrated.",
-    save: "Save 35%",
+    name: "Business Email",
+    category: "Professional Communication",
+    description:
+      "Give your business a professional identity with email addresses using your own domain name.",
+    price: "Coming",
+    currency: "",
+    period: " soon",
+    icon: Mail,
+    badge: "Coming Soon",
+    features: [
+      "Custom-domain email addresses",
+      "Professional business communication",
+      "Centralized email management",
+      "Business-focused email infrastructure",
+      "Pricing to be announced",
+    ],
+    note: "Our business email service is currently in development.",
+    cta: "Contact Us",
+    href: "/contact?service=business-email",
+    featured: false,
+    comingSoon: true,
   },
 ];

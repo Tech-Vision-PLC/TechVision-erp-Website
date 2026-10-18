@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Rocket, TrendingUp, Layers, ArrowRight } from "lucide-react";
 
 const pricingPreview = [
+
   {
     name: "Starter",
     description: "For small teams getting started",

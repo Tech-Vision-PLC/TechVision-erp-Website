@@ -25,6 +25,8 @@ const services = [
   "HR Management System",
   "Custom Software Development",
   "Website Development",
+  "N8n self-hosted automation",
+  "Business Email",
   "Other",
 ];
 
@@ -473,58 +475,7 @@ export default function ContactPage() {
 
       {/* Services */}
       <section className="mx-auto max-w-[1320px] px-6 py-16 lg:px-12 lg:py-20">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-primary">
-            What we do
-          </p>
 
-          <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            Technology that works for your organization
-          </h2>
-
-          <p className="mt-4 text-base leading-7 text-muted-foreground">
-            We help organizations improve operations, manage resources,
-            and build better digital experiences.
-          </p>
-        </div>
-
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {serviceCards.map((item) => {
-            const Icon = item.icon;
-
-            return (
-              <article
-                key={item.title}
-                className="group relative h-full"
-              >
-                {/* Offset accent matching your pricing page */}
-                <div className="absolute -left-1 top-1 h-full w-full border border-primary bg-primary/10" />
-
-                <div className="relative z-10 flex h-full min-h-[240px] flex-col border border-border bg-background p-6 transition-transform duration-300 group-hover:-translate-y-1">
-                  <div className="flex h-11 w-11 items-center justify-center bg-primary/10 text-primary">
-                    <Icon className="h-5 w-5" strokeWidth={1.8} />
-                  </div>
-
-                  <h3 className="mt-5 font-display text-lg font-semibold text-foreground">
-                    {item.title}
-                  </h3>
-
-                  <p className="mt-3 flex-1 text-sm leading-6 text-muted-foreground">
-                    {item.description}
-                  </p>
-
-                  <a
-                    href="#contact-form"
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary"
-                  >
-                    Discuss your needs
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </a>
-                </div>
-              </article>
-            );
-          })}
-        </div>
 
         {/* CTA */}
         <div className="mt-16 border border-border bg-card p-6 sm:p-10">

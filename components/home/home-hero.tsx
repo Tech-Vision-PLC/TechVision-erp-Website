@@ -26,8 +26,8 @@ export function HomeHero() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            LMS, Education ERP, ERP, and HR Management — one cloud platform to
-            run your school, university, or business smarter. Built for scale,
+            N8n self-hosted automation,ERP implementation,Business Email, and HR Management — one cloud platform to
+            run your business smarter. Built for scale,
             backed by local Ethiopian support.
           </p>
 

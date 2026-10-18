@@ -1,24 +1,19 @@
 import Link from "next/link";
 import {
   BookOpen,
-  GraduationCap,
   Building2,
   Users,
   ArrowRight,
+  Cloud,
 } from "lucide-react";
 
 const homeSolutions = [
+ 
   {
-    name: "Learning Management System",
-    short: "LMS",
+    name: "N8n Self-Hosted Automation",
+    short: "N8n",
     icon: BookOpen,
-    href: "/solutions#lms",
-  },
-  {
-    name: "Education ERP",
-    short: "Education ERP",
-    icon: GraduationCap,
-    href: "/solutions#education-erp",
+    href: "/solutions#self-hosted-n8n",
   },
   {
     name: "ERP System",
@@ -31,6 +26,12 @@ const homeSolutions = [
     short: "HR",
     icon: Users,
     href: "/solutions#hr",
+  },
+    {
+    name: "Website Development",
+    short: "Website Dev",
+    icon: Cloud,
+    href: "/solutions#website-development",
   },
 ];
 
