@@ -240,7 +240,7 @@ export const services = [
       "Deployment and launch support",
     ],
     note: "Final pricing depends on page count, features, and integrations.",
-    cta: "Request a Quote",
+    cta: "Request a Product",
     href: "/contact?service=website-development",
     featured: false,
     comingSoon: false,

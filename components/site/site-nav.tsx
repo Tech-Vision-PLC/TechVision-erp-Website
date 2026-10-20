@@ -104,7 +104,7 @@ export function SiteNav() {
     size="sm"
     className="inline-flex items-center justify-center rounded-[3px] border border-[#111827] bg-[#FBF8F8] px-5 py-2 font-mono text-[12px] text-[#111827] shadow-[-4px_4px_0_0_#FCF8FA,-4px_4px_0_1px_#111827] hover:bg-[#FBF8F8] hover:text-[#111827]"
   >
-    <Link href="/contact">Request Demo</Link>
+    <Link href="https://erp.techvision.et/lead-form/new">Request Demo</Link>
   </Button>
 </div>
 
@@ -146,7 +146,7 @@ export function SiteNav() {
               </Link>
             </Button>
             <Button asChild className="flex-1 bg-primary text-primary-foreground rounded-full h-14 text-base">
-              <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link href="https://erp.techvision.et/lead-form/new" onClick={() => setIsMobileMenuOpen(false)}>
                 Request Demo
               </Link>
             </Button>

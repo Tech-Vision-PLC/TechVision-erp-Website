@@ -38,7 +38,7 @@ export function HomeHero() {
   size="lg"
   className="inline-flex items-center justify-center gap-2 rounded-[3px] border border-[#111827] bg-[#111827] px-6 py-2 font-mono text-[12px] text-white shadow-[-4px_4px_0_0_#00D38D] hover:bg-[#111827] hover:text-white"
 >
-  <Link href="/contact">
+  <Link href="https://erp.techvision.et/lead-form/new">
     REQUEST DEMO
     <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
   </Link>
