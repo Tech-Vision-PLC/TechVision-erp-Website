@@ -118,11 +118,7 @@ export function BundlesSection() {
                       </span>
                     </div>
 
-                    {service.name === "Website Development" && (
-                      <p className="mt-2 text-xs text-muted-foreground">
-                        Get a quote tailored to your website.
-                      </p>
-                    )}
+                    {service.name === "Website Development" }
                   </div>
 
                   {/* Features */}
